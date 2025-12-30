@@ -1,24 +1,24 @@
-# Web Framework
-fastapi==0.109.0
-uvicorn[standard]==0.27.0
-pydantic==2.5.3
-pydantic-settings==2.1.0
+# Web# FastAPI and Server
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.6
+pydantic-settings==2.7.1
 
-# Async HTTP Client
-httpx==0.26.0
+# HTTP Client
+httpx==0.28.1
 
-# Speech Services
-deepgram-sdk==3.2.0
+# Speech Processing
+deepgram-sdk==3.9.3
 
 # LLM & Agent
-openai==1.10.0
-langchain==0.1.4
-langchain-openai==0.0.5
-langchain-core==0.1.23
+openai==1.59.7
+langchain==0.3.16
+langchain-openai==0.2.14
+langchain-core==0.3.29
 
 # Utilities
-python-dotenv==1.0.0
-python-multipart==0.0.6
+python-dotenv==1.0.1
+python-multipart==0.0.20
 
 # Logging
-structlog==24.1.0
+structlog==24.4.0
