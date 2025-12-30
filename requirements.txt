@@ -19,6 +19,7 @@ langchain-core==0.3.32
 # Utilities
 python-dotenv==1.0.1
 python-multipart==0.0.20
+audioop-lts==0.2.1
 
 # Logging
 structlog==24.4.0
