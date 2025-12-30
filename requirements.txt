@@ -1,4 +1,4 @@
-# Web# FastAPI and Server
+# FastAPI and Server
 fastapi==0.115.6
 uvicorn[standard]==0.34.0
 pydantic==2.10.6
@@ -10,11 +10,11 @@ httpx==0.28.1
 # Speech Processing
 deepgram-sdk==3.8.0
 
-# LLM & Agent
+# LLM & Agent - Compatible versions
 openai==1.59.7
 langchain==0.3.16
 langchain-openai==0.2.14
-langchain-core==0.3.29
+langchain-core==0.3.32
 
 # Utilities
 python-dotenv==1.0.1
