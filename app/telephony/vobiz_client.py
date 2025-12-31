@@ -57,28 +57,28 @@ class VobizClient:
         webhook_url = request.webhook_url or f"{webhook_base_url}{webhook_path}"
         status_callback_url = request.status_callback_url or f"{webhook_base_url}/telephony/events"
         
-        # Build API request payload
+        # Build API request payload (Vobiz uses lowercase field names)
         payload = {
-            "To": request.to_number,
-            "Url": webhook_url,
-            "Method": "POST",
-            "StatusCallback": status_callback_url,
-            "StatusCallbackMethod": "POST",
-            "Timeout": request.timeout
+            "to": request.to_number,
+            "url": webhook_url,
+            "method": "POST",
+            "status_callback": status_callback_url,
+            "status_callback_method": "POST",
+            "timeout": request.timeout
         }
         
         # Add From number if specified
         if request.from_number:
-            payload["From"] = request.from_number
+            payload["from"] = request.from_number
         
         # Add custom parameters for metadata
         if request.campaign_metadata:
-            payload["CampaignId"] = request.campaign_metadata.campaign_id
-            payload["CampaignName"] = request.campaign_metadata.campaign_name
+            payload["campaign_id"] = request.campaign_metadata.campaign_id
+            payload["campaign_name"] = request.campaign_metadata.campaign_name
         
         if request.notification_metadata:
-            payload["NotificationType"] = request.notification_metadata.notification_type
-            payload["Priority"] = request.notification_metadata.priority
+            payload["notification_type"] = request.notification_metadata.notification_type
+            payload["priority"] = request.notification_metadata.priority
         
         # API endpoint
         endpoint = f"{self.base_url}/api/v1/Account/{self.auth_id}/Call/"
