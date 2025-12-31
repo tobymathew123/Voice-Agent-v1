@@ -61,7 +61,7 @@ class VobizClient:
         payload = {
             "to": request.to_number,
             "from": request.from_number or settings.VOBIZ_FROM_NUMBER,  # Required by Vobiz
-            "url": webhook_url,
+            "answer_url": webhook_url,  # Vobiz calls this 'answer_url' not 'url'
             "method": "POST",
             "status_callback": status_callback_url,
             "status_callback_method": "POST",
