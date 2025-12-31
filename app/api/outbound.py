@@ -191,7 +191,17 @@ async def handle_notification_call(request: Request):
     try:
         # Parse form data
         form_data = await request.form()
-        call_sid = form_data.get("CallSid")
+        
+        # Log all form data to debug
+        logger.info(f"Notification webhook received. Form data: {dict(form_data)}")
+        
+        # Try multiple field names for call_sid (Vobiz might use different naming)
+        call_sid = (
+            form_data.get("CallSid") or 
+            form_data.get("call_sid") or 
+            form_data.get("CallUUID") or
+            form_data.get("call_uuid")
+        )
         
         logger.info(f"Notification call answered: {call_sid}")
         
