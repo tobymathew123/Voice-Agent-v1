@@ -68,8 +68,18 @@ async def initiate_notification_call(
         # Initiate call via Vobiz API
         result = await vobiz_client.initiate_call(request, webhook_base_url)
         
-        # Create session for tracking
-        call_sid = result.get("CallSid") or result.get("call_sid")
+        # Create session for tracking (try multiple field names for call_sid)
+        call_sid = (
+            result.get("CallSid") or 
+            result.get("call_sid") or 
+            result.get("CallUUID") or 
+            result.get("call_uuid") or
+            result.get("request_uuid") or
+            result.get("RequestUUID")
+        )
+        
+        logger.info(f"Creating session with call_sid: {call_sid}, Vobiz response: {result}")
+        
         if call_sid:
             session = session_manager.create_session(
                 call_id=call_sid,

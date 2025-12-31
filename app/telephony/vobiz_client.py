@@ -94,7 +94,8 @@ class VobizClient:
                 response.raise_for_status()
                 
                 result = response.json()
-                logger.info(f"Call initiated successfully: {result.get('CallSid', 'N/A')}")
+                logger.info(f"Vobiz API success response: {result}")
+                logger.info(f"Call initiated successfully: {result.get('CallSid') or result.get('call_sid') or result.get('CallUUID') or result.get('call_uuid')}")
                 return result
                 
             except httpx.HTTPStatusError as e:
