@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     VOBIZ_AUTH_ID: str
     VOBIZ_AUTH_TOKEN: str
     VOBIZ_API_URL: str = "https://api.vobiz.ai"
+    VOBIZ_FROM_NUMBER: str = "+912271264233"  # Default caller ID for outbound calls
 
     # Deepgram Configuration
     DEEPGRAM_API_KEY: str

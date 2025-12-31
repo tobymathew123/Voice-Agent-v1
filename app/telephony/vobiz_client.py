@@ -60,16 +60,13 @@ class VobizClient:
         # Build API request payload (Vobiz uses lowercase field names)
         payload = {
             "to": request.to_number,
+            "from": request.from_number or settings.VOBIZ_FROM_NUMBER,  # Required by Vobiz
             "url": webhook_url,
             "method": "POST",
             "status_callback": status_callback_url,
             "status_callback_method": "POST",
             "timeout": request.timeout
         }
-        
-        # Add From number if specified
-        if request.from_number:
-            payload["from"] = request.from_number
         
         # Add custom parameters for metadata
         if request.campaign_metadata:
