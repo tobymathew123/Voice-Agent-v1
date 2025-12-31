@@ -84,6 +84,7 @@ class VobizClient:
         endpoint = f"{self.base_url}/api/v1/Account/{self.auth_id}/Call/"
         
         logger.info(f"Initiating outbound call to {request.to_number} via {endpoint}")
+        logger.debug(f"Request payload: {payload}")
         
         async with httpx.AsyncClient() as client:
             try:
@@ -99,6 +100,13 @@ class VobizClient:
                 logger.info(f"Call initiated successfully: {result.get('CallSid', 'N/A')}")
                 return result
                 
+            except httpx.HTTPStatusError as e:
+                # Log the error response body for debugging
+                error_detail = e.response.text
+                logger.error(f"Failed to initiate call: {str(e)}")
+                logger.error(f"Vobiz API response: {error_detail}")
+                logger.error(f"Request payload was: {payload}")
+                raise
             except httpx.HTTPError as e:
                 logger.error(f"Failed to initiate call: {str(e)}")
                 raise
