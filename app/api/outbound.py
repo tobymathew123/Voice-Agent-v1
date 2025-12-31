@@ -238,6 +238,8 @@ Thank you."""
                 .build()
             )
             
+            logger.info(f"Sending fallback XML response: {xml_response}")
+            
             return Response(content=xml_response, media_type="application/xml")
         
         # Update status
