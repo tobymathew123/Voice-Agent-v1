@@ -217,10 +217,28 @@ async def handle_notification_call(request: Request):
         
         # Get session
         session = session_manager.get_session(call_sid)
+        
+        # Fallback: If session not found, use default test message
         if not session or not session.notification_metadata:
-            logger.warning(f"Session or notification metadata not found: {call_sid}")
-            error_xml = create_error_response("Session not found.")
-            return Response(content=error_xml, media_type="application/xml")
+            logger.warning(f"Session or notification metadata not found: {call_sid}. Using fallback message.")
+            
+            # Use default test message as fallback
+            default_message = """Hello. This is an automated test call from the AI voice agent platform.
+This call is being made to verify outbound calling functionality.
+No action is required from you.
+Thank you."""
+            
+            # Build simple XML response with default message
+            xml_response = (
+                VobizXMLResponse()
+                .say(default_message)
+                .pause(1)
+                .say("Goodbye.")
+                .hangup()
+                .build()
+            )
+            
+            return Response(content=xml_response, media_type="application/xml")
         
         # Update status
         session_manager.update_status(call_sid, CallStatus.IN_PROGRESS)
