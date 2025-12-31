@@ -20,13 +20,12 @@ class VobizClient:
         self.auth_id = settings.VOBIZ_AUTH_ID
         self.auth_token = settings.VOBIZ_AUTH_TOKEN
         
-        # Create authorization header
+        # Create authorization header (Basic Auth)
         credentials = f"{self.auth_id}:{self.auth_token}"
         encoded_credentials = b64encode(credentials.encode()).decode()
         
         self.headers = {
-            "Authorization": f"Bearer {self.auth_token}",
-            "X-Auth-ID": self.auth_id,
+            "Authorization": f"Basic {encoded_credentials}",
             "Content-Type": "application/json"
         }
     
